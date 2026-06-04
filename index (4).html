@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthill Prints Co. — DTF & 3D Printing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #2EC4A5;
+    --teal-dark: #1A9E89;
+    --teal-light: #E6F8F4;
+    --teal-mid: #A8E8DC;
+    --black: #1A1A1A;
+    --ink: #2D2D2D;
+    --pink: #FF7CA3;
+    --white: #FFFFFF;
+    --cream: #F8FFFE;
+    --card-shadow: 4px 4px 0px #1A9E89;
+    --card-shadow-black: 4px 4px 0px #1A1A1A;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    border-bottom: 3px solid var(--teal);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo img { height: 50px; width: auto; max-width: 80px; object-fit: contain; }
+  .nav-brand { font-family: 'Fredoka One', cursive; color: var(--teal); font-size: 1.4rem; letter-spacing: 0.5px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a {
+    color: #ccc; font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+  .cart-btn {
+    position: relative; background: var(--teal);
+    border: none; border-radius: 50px; padding: 8px 18px 8px 14px;
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 0.95rem; color: var(--black);
+    transition: transform 0.15s, background 0.2s;
+  }
+  .cart-btn:hover { background: var(--teal-dark); transform: translateY(-2px); }
+  .cart-icon { font-size: 1.2rem; }
+  .cart-count {
+    background: var(--pink); color: white;
+    border-radius: 50%; width: 20px; height: 20px;
+    font-size: 0.75rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: -6px; right: -6px;
+  }
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2.5px; background: var(--teal); border-radius: 2px; transition: all 0.3s; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: calc(100vh - 70px);
+    display: flex; align-items: center;
+    background: var(--black);
+    padding: 60px 5%;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, var(--teal) 1px, transparent 1px);
+    background-size: 36px 36px; opacity: 0.07;
+  }
+  .hero-content { max-width: 560px; position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-block; background: var(--teal); color: var(--black);
+    font-weight: 800; font-size: 0.8rem; letter-spacing: 1.5px;
+    padding: 5px 14px; border-radius: 50px; margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    color: white; line-height: 1.05;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--teal); }
+  .hero-sub {
+    color: #aaa; font-size: 1.1rem; line-height: 1.7;
+    margin-bottom: 36px; font-weight: 600;
+  }
+  .hero-sub strong { color: var(--teal-mid); }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--black);
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 1rem; padding: 14px 28px;
+    border: 3px solid var(--teal); border-radius: 50px;
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-block;
+    box-shadow: 4px 4px 0 var(--teal-dark);
+  }
+  .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--teal-dark); }
+  .btn-outline {
+    background: transparent; color: white;
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 1rem; padding: 14px 28px;
+    border: 3px solid rgba(255,255,255,0.3); border-radius: 50px;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+  .hero-mascot {
+    position: absolute; right: 5%; bottom: 0; z-index: 2;
+    width: clamp(260px, 35vw, 500px);
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+  }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap;
+  }
+  .hero-stat strong { display: block; font-family: 'Fredoka One', cursive; color: var(--teal); font-size: 1.8rem; }
+  .hero-stat span { color: #888; font-size: 0.85rem; font-weight: 600; }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 80px 5%; }
+  .section-tag {
+    display: inline-block; background: var(--teal-light);
+    color: var(--teal-dark); font-weight: 800; font-size: 0.8rem;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px; margin-bottom: 12px;
+    border: 2px solid var(--teal-mid);
+  }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 4vw, 3rem); color: var(--black); margin-bottom: 10px;
+  }
+  .section-sub { color: #666; font-size: 1rem; max-width: 520px; line-height: 1.7; font-weight: 600; margin-bottom: 48px; }
+
+  /* ─── SERVICES STRIP ─── */
+  .services-strip {
+    background: var(--teal); padding: 40px 5%;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+  .service-item {
+    background: white; border-radius: 16px;
+    padding: 28px 24px; text-align: center;
+    border: 3px solid var(--black);
+    box-shadow: var(--card-shadow-black);
+    transition: transform 0.2s;
+  }
+  .service-item:hover { transform: translate(-3px,-3px); }
+  .service-icon { font-size: 2.8rem; margin-bottom: 10px; display: block; }
+  .service-item h3 { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: var(--black); margin-bottom: 6px; }
+  .service-item p { font-size: 0.88rem; color: #555; line-height: 1.6; font-weight: 600; }
+
+  /* ─── SHOP SECTION ─── */
+  #shop { background: var(--cream); }
+  .filter-bar { display: flex; gap: 10px; margin-bottom: 36px; flex-wrap: wrap; }
+  .filter-btn {
+    background: white; border: 2.5px solid var(--black);
+    border-radius: 50px; padding: 8px 20px;
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    cursor: pointer; font-size: 0.9rem;
+    transition: all 0.15s;
+    box-shadow: 2px 2px 0 var(--black);
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--teal); border-color: var(--teal-dark);
+    box-shadow: 2px 2px 0 var(--teal-dark);
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .product-card {
+    background: white; border: 3px solid var(--black);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: var(--card-shadow-black);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .product-card:hover { transform: translate(-4px,-4px); box-shadow: 8px 8px 0 var(--black); }
+  .product-thumb {
+    height: 180px; display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; position: relative; overflow: hidden;
+  }
+  .badge-cat {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--black); color: var(--teal);
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 50px;
+  }
+  .product-info { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+  .product-name { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: var(--black); margin-bottom: 4px; }
+  .product-desc { font-size: 0.82rem; color: #666; line-height: 1.5; font-weight: 600; flex: 1; margin-bottom: 14px; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .product-price { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: var(--teal-dark); }
+  .add-btn {
+    background: var(--black); color: white;
+    border: none; border-radius: 50px;
+    padding: 9px 18px; font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 0.88rem;
+    cursor: pointer; transition: all 0.15s;
+    border: 2.5px solid var(--black);
+    white-space: nowrap;
+  }
+  .add-btn:hover { background: var(--teal); color: var(--black); border-color: var(--teal-dark); transform: translateY(-2px); }
+  .add-btn.added { background: var(--teal); color: var(--black); border-color: var(--teal-dark); }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--black); color: white; }
+  #about .section-title { color: white; }
+  #about .section-sub { color: #aaa; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-img-wrap {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--teal); border-radius: 24px; padding: 30px;
+    border: 4px solid var(--teal-dark);
+    box-shadow: 8px 8px 0 var(--teal-dark);
+  }
+  .about-img-wrap img { width: 100%; max-width: 280px; height: auto; object-fit: contain; }
+  .about-features { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; }
+  .about-feat {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(255,255,255,0.06); border-radius: 14px;
+    padding: 16px; border: 1.5px solid rgba(46,196,165,0.2);
+  }
+  .about-feat-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .about-feat h4 { font-family: 'Fredoka One', cursive; color: var(--teal); font-size: 1rem; margin-bottom: 3px; }
+  .about-feat p { font-size: 0.85rem; color: #aaa; line-height: 1.6; font-weight: 600; }
+
+  /* ─── HOW IT WORKS ─── */
+  #how { background: var(--teal-light); }
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+  .step-card {
+    background: white; border: 3px solid var(--black);
+    border-radius: 20px; padding: 28px 22px;
+    box-shadow: var(--card-shadow-black);
+    position: relative; text-align: center;
+  }
+  .step-num {
+    position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    background: var(--teal); color: var(--black);
+    font-family: 'Fredoka One', cursive; font-size: 1.2rem;
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 3px solid var(--black);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-icon { font-size: 2.4rem; margin: 10px 0 10px; display: block; }
+  .step-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.05rem; color: var(--black); margin-bottom: 6px; }
+  .step-card p { font-size: 0.83rem; color: #555; line-height: 1.6; font-weight: 600; }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--cream); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
+  .contact-card {
+    background: white; border: 3px solid var(--black);
+    border-radius: 20px; padding: 32px;
+    box-shadow: var(--card-shadow-black);
+  }
+  .contact-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.4rem; margin-bottom: 6px; }
+  .contact-card p { color: #666; font-size: 0.9rem; line-height: 1.7; font-weight: 600; margin-bottom: 20px; }
+  .contact-items { display: flex; flex-direction: column; gap: 14px; }
+  .contact-item { display: flex; align-items: center; gap: 12px; }
+  .contact-item-icon {
+    width: 40px; height: 40px; background: var(--teal-light);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; border: 2px solid var(--teal-mid); flex-shrink: 0;
+  }
+  .contact-item-text { font-weight: 700; font-size: 0.9rem; color: var(--ink); }
+  .contact-item-label { font-size: 0.75rem; color: #999; font-weight: 600; }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  label { font-weight: 700; font-size: 0.85rem; color: var(--ink); }
+  input, textarea, select {
+    border: 2.5px solid #ddd; border-radius: 10px;
+    padding: 11px 14px; font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    transition: border-color 0.2s; outline: none;
+    background: white;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--teal); }
+  textarea { min-height: 110px; resize: vertical; }
+  .submit-btn {
+    background: var(--teal); color: var(--black);
+    border: 3px solid var(--teal-dark); border-radius: 50px;
+    padding: 13px; font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 1rem; cursor: pointer;
+    box-shadow: 3px 3px 0 var(--teal-dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .submit-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--teal-dark); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black); color: white;
+    padding: 50px 5% 30px; border-top: 4px solid var(--teal);
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .footer-brand img { height: 44px; width: auto; max-width: 70px; object-fit: contain; }
+  .footer-brand-name { font-family: 'Fredoka One', cursive; color: var(--teal); font-size: 1.3rem; }
+  .footer-desc { color: #888; font-size: 0.88rem; line-height: 1.7; font-weight: 600; }
+  .footer-col h4 { font-family: 'Fredoka One', cursive; color: var(--teal); font-size: 1.05rem; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 8px; }
+  .footer-col a { color: #888; text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--teal); }
+  .footer-bottom { border-top: 1px solid #333; padding-top: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap; }
+  .footer-bottom p { font-size: 0.82rem; color: #666; font-weight: 600; }
+  .footer-ant { font-size: 1.3rem; animation: wiggle 2s ease-in-out infinite; display: inline-block; }
+  @keyframes wiggle {
+    0%,100% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(15deg); }
+  }
+
+  /* ─── CART SIDEBAR ─── */
+  .cart-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 2000; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+  .cart-sidebar {
+    position: fixed; top: 0; right: -420px; width: 400px;
+    max-width: 95vw; height: 100%; background: white;
+    z-index: 2001; display: flex; flex-direction: column;
+    transition: right 0.35s cubic-bezier(.4,0,.2,1);
+    border-left: 4px solid var(--teal);
+  }
+  .cart-sidebar.open { right: 0; }
+  .cart-header {
+    padding: 20px 20px 16px; background: var(--black);
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 3px solid var(--teal);
+  }
+  .cart-header h2 { font-family: 'Fredoka One', cursive; color: white; font-size: 1.4rem; }
+  .cart-close {
+    background: none; border: 2px solid #555; border-radius: 50%;
+    width: 32px; height: 32px; color: white; cursor: pointer;
+    font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s;
+  }
+  .cart-close:hover { border-color: var(--teal); color: var(--teal); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
+  .cart-empty { text-align: center; padding: 60px 20px; color: #999; }
+  .cart-empty .empty-ant { font-size: 3.5rem; display: block; margin-bottom: 10px; }
+  .cart-empty p { font-weight: 700; font-size: 0.95rem; }
+  .cart-item {
+    display: flex; gap: 14px; align-items: center;
+    padding: 14px 0; border-bottom: 1.5px solid #eee;
+  }
+  .cart-item-icon {
+    width: 52px; height: 52px; background: var(--teal-light);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; flex-shrink: 0; border: 2px solid var(--teal-mid);
+  }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: 800; font-size: 0.9rem; color: var(--ink); }
+  .cart-item-price { font-family: 'Fredoka One', cursive; color: var(--teal-dark); font-size: 1rem; }
+  .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .qty-btn {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--black); background: white;
+    cursor: pointer; font-weight: 800; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .qty-btn:hover { background: var(--teal); border-color: var(--teal-dark); }
+  .qty-num { font-weight: 800; font-size: 0.9rem; min-width: 20px; text-align: center; }
+  .cart-remove { background: none; border: none; cursor: pointer; color: #ccc; font-size: 1.1rem; padding: 4px; transition: color 0.2s; }
+  .cart-remove:hover { color: #e74c3c; }
+  .cart-footer { padding: 16px; border-top: 2px solid #eee; background: var(--cream); }
+  .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .cart-total span { font-weight: 800; font-size: 1rem; }
+  .cart-total strong { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--teal-dark); }
+  .checkout-btn {
+    width: 100%; background: var(--black); color: var(--teal);
+    border: 3px solid var(--black); border-radius: 50px;
+    padding: 14px; font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 1rem; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .checkout-btn:hover { background: var(--teal); color: var(--black); border-color: var(--teal-dark); }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--black); color: white;
+    padding: 12px 24px; border-radius: 50px; font-weight: 700;
+    font-size: 0.9rem; border: 2px solid var(--teal);
+    z-index: 3000; transition: transform 0.3s;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ─── MOBILE NAV ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; gap: 0; position: absolute; top: 70px; left: 0; right: 0; background: var(--black); border-bottom: 3px solid var(--teal); padding: 10px 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 12px 24px; border-bottom: 1px solid #222; }
+    .hamburger { display: flex; }
+    .hero { flex-direction: column; text-align: center; padding-bottom: 40px; }
+    .hero-mascot { position: relative; right: auto; width: 200px; margin: 30px auto 0; }
+    .hero-ctas { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    nav { position: relative; }
+    .hero { min-height: auto; padding-top: 50px; }
+  }
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img id="nav-logo-img" src="https://i.postimg.cc/d1dsc1c6/Whats-App-Image-2026-05-25-at-22-29-34-1-removebg-preview.png" alt="Anthill Prints Co. Logo">
+    <span class="nav-brand">Anthill Prints Co.</span>
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a href="#shop">Shop</a>
+    <a href="#how">How It Works</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+      <span class="cart-icon">🛒</span>
+      Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-dots"></div>
+  <div class="hero-content">
+    <span class="hero-badge">🐜 Open for Business!</span>
+    <h1>Print<br><span>Anything.</span><br>We've Got You.</h1>
+    <p class="hero-sub">Custom <strong>DTF Heat Press</strong> clothing & <strong>3D Printed</strong> creations made by busy little ants who love what they do.</p>
+    <div class="hero-ctas">
+      <a href="#shop" class="btn-primary">🛍️ Shop Now</a>
+      <a href="#contact" class="btn-outline">Get a Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>100%</strong><span>Custom Designs</span></div>
+      <div class="hero-stat"><strong>Fast</strong><span>Turnaround</span></div>
+      <div class="hero-stat"><strong>Local</strong><span>&amp; Friendly</span></div>
+    </div>
+  </div>
+  <img id="hero-mascot-img" src="https://i.postimg.cc/d1dsc1c6/Whats-App-Image-2026-05-25-at-22-29-34-1-removebg-preview.png" alt="Anthill Prints Ant Mascot" class="hero-mascot">
+</section>
+
+<div class="services-strip">
+  <div class="service-item">
+    <span class="service-icon">👕</span>
+    <h3>DTF Heat Press</h3>
+    <p>Vibrant, full-colour transfers on any fabric. T-shirts, hoodies, hats & more — no minimum order!</p>
+  </div>
+  <div class="service-item">
+    <span class="service-icon">🖨️</span>
+    <h3>3D Printing</h3>
+    <p>From prototypes to custom figurines, phone stands to keychains. If you can dream it, we print it!</p>
+  </div>
+  <div class="service-item">
+    <span class="service-icon">🎨</span>
+    <h3>Custom Design</h3>
+    <p>Got an idea but no artwork? Our team helps bring your vision to life with in-house design support.</p>
+  </div>
+  <div class="service-item">
+    <span class="service-icon">📦</span>
+    <h3>Fast Delivery</h3>
+    <p>We work hard (like ants!) to get your order ready fast. Local pickup &amp; delivery options available.</p>
+  </div>
+</div>
+
+<section id="shop">
+  <div class="section-tag">🛍️ Our Products</div>
+  <h2 class="section-title">Find Something You'll Love</h2>
+  <p class="section-sub">Browse our range of custom clothing prints and 3D printed goodies. Every item is made fresh just for you!</p>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('all',this)">All Products</button>
+    <button class="filter-btn" onclick="filterProducts('dtf',this)">👕 DTF Clothing</button>
+    <button class="filter-btn" onclick="filterProducts('3d',this)">🖨️ 3D Prints</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section id="how">
+  <div class="section-tag">📋 The Process</div>
+  <h2 class="section-title">How It Works</h2>
+  <p class="section-sub">Ordering custom products has never been easier. We make it fun from start to finish!</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <span class="step-icon">💡</span>
+      <h3>Share Your Idea</h3>
+      <p>Tell us what you want — send your design, logo, or just a rough idea. We'll take it from there!</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <span class="step-icon">🎨</span>
+      <h3>We Design It</h3>
+      <p>Our team preps your artwork and sends you a digital proof before we print a single thing.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <span class="step-icon">⚙️</span>
+      <h3>We Print It</h3>
+      <p>Your order goes into production. Our machines are fast, our quality checks are thorough.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <span class="step-icon">🚀</span>
+      <h3>You Get It!</h3>
+      <p>Collect in store or have it delivered to your door. Ready to show off to the world!</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-tag" style="background:rgba(46,196,165,0.15);border-color:rgba(46,196,165,0.3);">🐜 Our Story</div>
+  <h2 class="section-title">Small Team, Big Ideas</h2>
+  <p class="section-sub">We started with a heat press and a dream. Now we're bringing custom printing and 3D magic to our community, one order at a time.</p>
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <img id="about-logo-img" src="https://i.postimg.cc/d1dsc1c6/Whats-App-Image-2026-05-25-at-22-29-34-1-removebg-preview.png" alt="Anthill Prints mascot">
+    </div>
+    <div>
+      <div class="about-features">
+        <div class="about-feat">
+          <span class="about-feat-icon">🐜</span>
+          <div>
+            <h4>Built Like an Ant Colony</h4>
+            <p>Every ant works with purpose. We're a small, dedicated crew who obsess over quality and love what we do. No cutting corners here!</p>
+          </div>
+        </div>
+        <div class="about-feat">
+          <span class="about-feat-icon">💪</span>
+          <div>
+            <h4>Startup Spirit</h4>
+            <p>We're new, we're hungry, and we're excited to grow with you. When you support us, you're supporting a local dream.</p>
+          </div>
+        </div>
+        <div class="about-feat">
+          <span class="about-feat-icon">♻️</span>
+          <div>
+            <h4>Mindful Printing</h4>
+            <p>We use quality inks and materials — made to last. We care about doing things right, not just fast.</p>
+          </div>
+        </div>
+        <div class="about-feat">
+          <span class="about-feat-icon">🤝</span>
+          <div>
+            <h4>Community First</h4>
+            <p>Local events, sports teams, small businesses — we love being part of our community's story.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-tag">📬 Get In Touch</div>
+  <h2 class="section-title">Let's Make Something!</h2>
+  <p class="section-sub">Have a project in mind? Want a quote? Just want to say hi? We'd love to hear from you!</p>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-card">
+        <h3>Find the Anthill 🐜</h3>
+        <p>We're a small team with big hearts. Drop us a message anytime!</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📧</div>
+            <div>
+              <div class="contact-item-text">hello@anthillprints.com.au</div>
+              <div class="contact-item-label">Email us anytime</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📱</div>
+            <div>
+              <div class="contact-item-text">0400 000 000</div>
+              <div class="contact-item-label">Call or text</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <div class="contact-item-text">Your Town, Australia</div>
+              <div class="contact-item-label">Local pickup available</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">⏰</div>
+            <div>
+              <div class="contact-item-text">Mon – Fri: 9am – 5pm</div>
+              <div class="contact-item-label">We reply fast!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Your name...">
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Your last name...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label for="service">What Are You After?</label>
+        <select id="service">
+          <option value="">Select a service...</option>
+          <option>👕 DTF Heat Press Clothing</option>
+          <option>🖨️ 3D Printing</option>
+          <option>🎨 Custom Design Help</option>
+          <option>📦 Bulk Order Enquiry</option>
+          <option>🤔 Not Sure Yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Tell Us About Your Project</label>
+        <textarea id="message" placeholder="Describe your idea, quantities, any special requirements..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="handleSubmit()">🐜 Send Message!</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img id="footer-logo-img" src="https://i.postimg.cc/d1dsc1c6/Whats-App-Image-2026-05-25-at-22-29-34-1-removebg-preview.png" alt="Anthill Prints Logo">
+        <span class="footer-brand-name">Anthill Prints Co.</span>
+      </div>
+      <p class="footer-desc">Custom DTF heat press clothing &amp; 3D printing — made with love by our little colony of creators. No job too small, no dream too big!</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#shop">DTF Clothing Prints</a></li>
+        <li><a href="#shop">3D Printing</a></li>
+        <li><a href="#contact">Custom Design</a></li>
+        <li><a href="#contact">Bulk Orders</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Anthill Prints Co. All rights reserved. Made with <span class="footer-ant">🐜</span> and lots of coffee.</p>
+    <p>ABN: 00 000 000 000</p>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>🛒 Your Cart</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">$0.00</strong>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Simple product data
+  const products = [
+    { id: 1, category: 'dtf', name: 'Custom White Tee', desc: 'Premium cotton t-shirt with your custom DTF print.', price: 29.99, icon: '👕' },
+    { id: 2, category: 'dtf', name: 'Logo Hoodie', desc: 'Heavyweight hoodie with high-quality heat press logo.', price: 54.99, icon: '🧥' },
+    { id: 3, category: '3d', name: 'Articulated Ant', desc: 'Fully movable 3D printed ant mascot. A desk favourite!', price: 14.99, icon: '🐜' },
+    { id: 4, category: '3d', name: 'Planetary Planter', desc: 'Sci-fi inspired 3D printed pot for your succulents.', price: 24.99, icon: '🪴' },
+    { id: 5, category: 'dtf', name: 'Custom Tote Bag', desc: 'Durable canvas tote featuring your artwork.', price: 19.99, icon: '👜' },
+    { id: 6, category: '3d', name: 'Low Poly T-Rex', desc: 'Modern geometric dinosaur figure for home decor.', price: 18.99, icon: '🦖' },
+    { id: 7, category: 'dtf', name: 'Pro Team Snapback', desc: 'Structured cap with crisp DTF transfer design.', price: 25.99, icon: '🧢' },
+    { id: 8, category: '3d', name: 'Puzzle Sphere', desc: 'Challenging 3D printed mechanical puzzle ball.', price: 12.99, icon: '🔮' }
+  ];
+
+  let cart = [];
+
+  function renderProducts(cat) {
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = '';
+    const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+    
+    filtered.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <div class="product-thumb">
+          <span class="badge-cat">${p.category.toUpperCase()}</span>
+          ${p.icon}
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">${p.name}</h3>
+          <p class="product-desc">${p.desc}</p>
+          <div class="product-footer">
+            <span class="product-price">$${p.price}</span>
+            <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  window.filterProducts = function(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts(cat);
+  };
+
+  window.addToCart = function(id) {
+    const item = products.find(p => p.id === id);
+    const existing = cart.find(c => c.id === id);
+    if(existing) {
+      existing.qty++;
+    } else {
+      cart.push({...item, qty: 1});
+    }
+    updateCart();
+    showToast(`${item.name} added to cart! 🐜`);
+  };
+
+  function updateCart() {
+    const count = cart.reduce((acc, curr) => acc + curr.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+    
+    const itemsList = document.getElementById('cartItems');
+    itemsList.innerHTML = '';
+    
+    if(cart.length === 0) {
+      itemsList.innerHTML = `
+        <div class="cart-empty">
+          <span class="empty-ant">🐜</span>
+          <p>Your cart is empty!</p>
+        </div>
+      `;
+      document.getElementById('cartTotal').textContent = '$0.00';
+      return;
+    }
+    
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-icon">${item.icon}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">$${item.price}</div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          </div>
+        </div>
+        <button class="cart-remove" onclick="removeFromCart(${item.id})">✕</button>
+      `;
+      itemsList.appendChild(div);
+    });
+    document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+  }
+
+  window.changeQty = function(id, delta) {
+    const item = cart.find(c => c.id === id);
+    if(item) {
+      item.qty += delta;
+      if(item.qty <= 0) {
+        removeFromCart(id);
+      } else {
+        updateCart();
+      }
+    }
+  };
+
+  window.removeFromCart = function(id) {
+    cart = cart.filter(c => c.id !== id);
+    updateCart();
+  };
+
+  window.openCart = function(){ 
+    document.getElementById('cartSidebar').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+  };
+  window.closeCart = function(){ 
+    document.getElementById('cartSidebar').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  };
+  window.checkout = function(){
+    if(!cart.length){ showToast('Your cart is empty! 🐜'); return; }
+    showToast('🎉 Coming soon — payment integration! Email us your order.');
+  };
+
+  document.getElementById('cartBtn').addEventListener('click', openCart);
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 3000);
+  }
+
+  window.handleSubmit = function(){
+    const name = document.getElementById('fname').value;
+    if(!name){ showToast('Please fill in your name! 🐜'); return; }
+    showToast('🐜 Message sent! We\'ll be in touch soon!');
+    document.getElementById('fname').value='';
+    document.getElementById('lname').value='';
+    document.getElementById('email').value='';
+    document.getElementById('message').value='';
+  };
+
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+
+  renderProducts('all');
+</script>
+</body>
+</html>
