@@ -16,7 +16,7 @@
     --ink: #2D2D2D;
     --pink: #FF7CA3;
     --white: #FFFFFF;
-    --cream: #F8FFFE;
+    --cream: #E0E6F6;
     --card-shadow: 4px 4px 0px #1A9E89;
     --card-shadow-black: 4px 4px 0px #1A1A1A;
   }
@@ -72,7 +72,7 @@
   .hero {
     min-height: calc(100vh - 70px);
     display: flex; align-items: center;
-    background: var(--black);
+    background: #E0E6F6;
     padding: 60px 5%;
     position: relative; overflow: hidden;
   }
@@ -154,7 +154,7 @@
 
   /* ─── SERVICES STRIP ─── */
   .services-strip {
-    background: var(--teal); padding: 40px 5%;
+    background: #E0E6F6; padding: 40px 5%;
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 24px;
   }
@@ -226,9 +226,9 @@
   .add-btn.added { background: var(--teal); color: var(--black); border-color: var(--teal-dark); }
 
   /* ─── ABOUT ─── */
-  #about { background: var(--black); color: white; }
-  #about .section-title { color: white; }
-  #about .section-sub { color: #aaa; }
+  #about { background: #E0E6F6; color: var(--ink); }
+  #about .section-title { color: var(--black); }
+  #about .section-sub { color: #666; }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
   .about-img-wrap {
     display: flex; align-items: center; justify-content: center;
@@ -248,7 +248,7 @@
   .about-feat p { font-size: 0.85rem; color: #aaa; line-height: 1.6; font-weight: 600; }
 
   /* ─── HOW IT WORKS ─── */
-  #how { background: var(--teal-light); }
+  #how { background: #E0E6F6; }
   .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
   .step-card {
     background: white; border: 3px solid var(--black);
@@ -312,20 +312,20 @@
 
   /* ─── FOOTER ─── */
   footer {
-    background: var(--black); color: white;
+    background: #E0E6F6; color: var(--ink);
     padding: 50px 5% 30px; border-top: 4px solid var(--teal);
   }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
   .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .footer-brand img { height: 44px; width: auto; max-width: 70px; object-fit: contain; }
   .footer-brand-name { font-family: 'Fredoka One', cursive; color: var(--teal); font-size: 1.3rem; }
-  .footer-desc { color: #888; font-size: 0.88rem; line-height: 1.7; font-weight: 600; }
+  .footer-desc { color: #666; font-size: 0.88rem; line-height: 1.7; font-weight: 600; }
   .footer-col h4 { font-family: 'Fredoka One', cursive; color: var(--teal); font-size: 1.05rem; margin-bottom: 14px; }
   .footer-col ul { list-style: none; }
   .footer-col li { margin-bottom: 8px; }
-  .footer-col a { color: #888; text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: color 0.2s; }
+  .footer-col a { color: #555; text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: color 0.2s; }
   .footer-col a:hover { color: var(--teal); }
-  .footer-bottom { border-top: 1px solid #333; padding-top: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap; }
+  .footer-bottom { border-top: 1px solid #ccc; padding-top: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap; }
   .footer-bottom p { font-size: 0.82rem; color: #666; font-weight: 600; }
   .footer-ant { font-size: 1.3rem; animation: wiggle 2s ease-in-out infinite; display: inline-block; }
   @keyframes wiggle {
@@ -442,7 +442,7 @@
 
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img id="nav-logo-img" src="https://i.postimg.cc/d1dsc1c6/Whats-App-Image-2026-05-25-at-22-29-34-1-removebg-preview.png" alt="Anthill Prints Co. Logo">
+    <img id="nav-logo-img" src="data:image/jpeg;base64,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" alt="Anthill Prints Co. Logo">
     <span class="nav-brand">Anthill Prints Co.</span>
   </a>
   <div class="nav-links" id="nav-links">
@@ -555,7 +555,7 @@
   <p class="section-sub">We started with a heat press and a dream. Now we're bringing custom printing and 3D magic to our community, one order at a time.</p>
   <div class="about-grid">
     <div class="about-img-wrap">
-      <img id="about-logo-img" src="https://i.postimg.cc/d1dsc1c6/Whats-App-Image-2026-05-25-at-22-29-34-1-removebg-preview.png" alt="Anthill Prints mascot">
+      <img id="about-logo-img" src="data:image/jpeg;base64,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" alt="Anthill Prints mascot">
     </div>
     <div>
       <div class="about-features">
@@ -672,7 +672,7 @@
   <div class="footer-grid">
     <div>
       <div class="footer-brand">
-        <img id="footer-logo-img" src="https://i.postimg.cc/d1dsc1c6/Whats-App-Image-2026-05-25-at-22-29-34-1-removebg-preview.png" alt="Anthill Prints Logo">
+        <img id="footer-logo-img" src="data:image/jpeg;base64,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" alt="Anthill Prints Logo">
         <span class="footer-brand-name">Anthill Prints Co.</span>
       </div>
       <p class="footer-desc">Custom DTF heat press clothing &amp; 3D printing — made with love by our little colony of creators. No job too small, no dream too big!</p>
